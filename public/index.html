@@ -144,38 +144,47 @@
         var dataSource = {
                 datasets: [
                     {
-                        data: [],
+                        data: [30, 350, 90],
                         backgroundColor: [
                             '#ffcd56',
                             '#ff6384',
                             '#36a2eb',
                             '#fd6b19',
-                        ]
+                        ],
                     }
                 ],
-                labels: []
+                labels: [
+                    'Eat Out',
+                    'Rent',
+                    'groceries'
+
+                ]
             };
 
         function createChart() {
-            var ctx = document.getElementById('myChart').getContext('2d');
+            var ctx = document.getElementById("myChart").getContext('2d');
             var myPieChart = new Chart(ctx, {
                 type: 'pie',
                 data: dataSource
             });
         }
+        createChart();
 
         function getBudget() {
-            axios.get('http://localhost:3000/budget')
+            axios.get('/budget')
             .then(function (res) {
+                console.log(res);
                 for (var i = 0; i < res.data.myBudget.length; i++) {
-                    dataSource.datasets[0].data[i] = res.data.myBudget[i].budget;
+                   dataSource.datasets[0].data[i] = res.data.myBudget[i].budget;
                     dataSource.labels[i] = res.data.myBudget[i].title;
-                    createChart();
-                }
-            });
+                 }
+                createChart();
+             });
         }
-
         getBudget();
+
+
+        
     </script>
 
 </body>
