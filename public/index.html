@@ -268,7 +268,7 @@
         }
 
         function getBudget() {
-            axios.get('/myBudget')
+            axios.get('http://localhost:3000/mybudget')
                 .then(function (res) {
                     console.log(res);
                     myDonutData = res.data;
